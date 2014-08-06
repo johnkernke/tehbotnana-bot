@@ -7,8 +7,9 @@ An IRC bot by TehBanana.
 ```
 $ npm install
 $ cp config.sample.js config.js
+$ EDITOR config.js
+$ npm start
 ```
-edit config.js
 
 ## Features
 
