@@ -4,8 +4,10 @@ An IRC bot by TehBanana.
 
 ## Before running
 
-`$ npm install`
-`$ cp config.sample.js config.js`
+```
+$ npm install
+$ cp config.sample.js config.js
+```
 edit config.js
 
 ## Features
