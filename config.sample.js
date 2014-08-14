@@ -1,9 +1,9 @@
 module.exports = {
+    log: 'notice',
     irc: {
         host: 'irc.server.com',
         port: 6667,
-        nick: 'TehBotnana',
-        log: 'notice'
+        nick: 'TehBotnana'
     },
     channels: {
         "#tehbotnana": {
@@ -33,6 +33,5 @@ module.exports = {
         consumer_secret: '',
         access_token_key: '',
         access_token_secret: ''
-    },
-    twitter_verbose: true // need to make this nicer, without passing through to ntwitter.. use similar method to IRC, maybe join the config setting?
+    }
 }
