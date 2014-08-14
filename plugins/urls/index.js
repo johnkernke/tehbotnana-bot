@@ -9,6 +9,7 @@ function urls() {
     self.channels = [];
 
     self.handler = function (channel, nick, message) {
+        channel = channel.toLowerCase();
         var regex_url = /((https?|ftp)\:\/\/)?([a-z0-9+!*(),;?&=\$_.-]+(\:[a-z0-9+!*(),;?&=\$_.-]+)?@)?([a-z0-9-.]*)\.([a-z]{2,4})(\:[0-9]{2,5})?(\/([a-z0-9+\$_-]\.?)+)*\/?(\?[a-z+&\$_.-][a-z0-9;:@&%=+\/\$_.-]*)?(#[a-z_.-][a-z0-9+\$_.-]*)?/ig,
             regex_url_start = /(https?|ftp)\:\/\/.+?/ig,
             regex_title = /<\s*title[^>]*>(.+?)<\s*\/\s*title>/gi;
@@ -34,6 +35,7 @@ function urls() {
         }
 
         msg_url = url.format(msg_url);
+        logger.notice('Looking up ' + msg_url);
         request(msg_url, function (error, res, body) {
             if (error) {
                 logger.notice('Error getting page (' + msg_url + '): ' + error);
@@ -59,9 +61,11 @@ function urls() {
 
     for (channel in app.config.channels) {
         if (app.config.channels[channel].urls === true) {
-            self.channels.push(channel);
+            self.channels.push(channel.toLowerCase());
         }
     }
+
+    logger.notice('Enabled for: ' + self.channels.join(', '));
 
     app.irc.on('message', self.handler);
 }
