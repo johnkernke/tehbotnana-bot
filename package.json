@@ -12,8 +12,9 @@
         "test": "node ./test/irc_twitter"
     },
     "dependencies": {
-        "ntwitter": "~0.5.0",
         "html-entities": "~1.0.10",
-        "request": "~2.40.0"
+        "ntwitter": "~0.5.0",
+        "request": "~2.40.0",
+        "tldjs": "~1.5.0"
     }
 }

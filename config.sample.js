@@ -6,26 +6,23 @@ module.exports = {
         nick: 'TehBotnana'
     },
     channels: {
-        "#tehbotnana": {
-            twitter: {
-                accounts: ["tehbanana_"],
-                blocked: {
-                    users: ["blockeduser"],
-                    content: ["blockedcontent"]
-                }
-            }
-        },
         "#tehbanana": {
             twitter: {
                 accounts: ["tehbanana_"],
                 blocked: {
-                    users: ["blockeduser"],
-                    content: ["blockedcontent"]
+                    users: [],
+                    content: []
                 }
+            },
+            urls: {
+                global_cooldown: 10,
+                single_cooldown: 1800,
+                multilink: 'first', // off / first / all
+                user_blacklist: [],
+                user_whitelist: [],
+                domain_blacklist: [],
+                domain_whitelist: []
             }
-        },
-        "#random": {
-
         }
     },
     twitter: {
@@ -33,5 +30,8 @@ module.exports = {
         consumer_secret: '',
         access_token_key: '',
         access_token_secret: ''
+    },
+    urls: {
+        cache: 300
     }
 }
