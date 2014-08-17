@@ -3,12 +3,13 @@ var fs = require('fs');
 app = {};
 app.config = require('./config.js');
 
+app.config.irc.log = app.config.log;
 app.config.irc.autoJoinChannels = [];
 for (var channel in app.config.channels) {
     app.config.irc.autoJoinChannels.push(channel);
 }
 
-app.irc = new (require('./lib/irc'))(app.config.irc);
+app.irc = new (require('tehbotnana-irc'))(app.config.irc);
 
 // load all plugins from the directory
 fs.readdirSync('./plugins/').forEach(function (file) {

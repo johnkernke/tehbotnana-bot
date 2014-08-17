@@ -1,4 +1,4 @@
-var logger = new (require('../../lib/logger'))('URLs'),
+var logger = new (require('logger'))(app.config.log, 'URLs'),
     request = require('request'),
     url = require('url'),
     tld = require('tldjs');
@@ -14,7 +14,6 @@ function urls() {
     self.handler = function (channel, nick, message) {
         channel = channel.toLowerCase();
         var _cfg = self.channels[channel],
-            // regex_url = /(https?:\/\/)?([\da-z\.-]+)\.([a-z\.]{2,6})([\/\w \.-]*)*\/?/,
             regex_url = /(?:(\S*)\:\/\/)?(?:[a-z0-9+!*(),;?&=\$_.-]+(?:\:[a-z0-9+!*(),;?&=\$_.-]+)?@)?(?:[a-z0-9-.]*)\.(?:[a-z]{2,4})(?:\:[0-9]{2,5})?(?:\/(?:[a-z0-9+\$_-]\.?)+)*\/?(?:\?[a-z+&\$_.-][a-z0-9;:@&%=+\/\$_.-]*)?(?:#[a-z_.-][a-z0-9+\$_.-]*)?/ig,
             match,
             matches = [],

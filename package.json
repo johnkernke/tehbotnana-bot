@@ -1,5 +1,5 @@
 {
-    "name": "tehbotnana-irc",
+    "name": "tehbotnana-bot",
     "private": true,
     "description": "IRC bot by TehBanana",
     "version": "0.0.1",
@@ -8,13 +8,14 @@
         "email": "john.kernke@gmail.com"
     },
     "scripts": {
-        "start": "node ./app",
-        "test": "node ./test/irc_twitter"
+        "start": "node ./app"
     },
     "dependencies": {
         "html-entities": "~1.0.10",
+        "logger": "johnkernke/logger",
         "ntwitter": "~0.5.0",
         "request": "~2.40.0",
+        "tehbotnana-irc": "johnkernke/tehbotnana-irc",
         "tldjs": "~1.5.0"
     }
 }

@@ -1,6 +1,6 @@
 var ntwitter = new (require('ntwitter'))(app.config.twitter),
     entities = new (require('html-entities').AllHtmlEntities),
-    logger = new (require('../../lib/logger'))('Twitter');
+    logger = new (require('logger'))(app.config.log, 'Twitter');
 
 module.exports = irc_twitter;
 
