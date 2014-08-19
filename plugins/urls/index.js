@@ -25,12 +25,6 @@ function urls() {
             return;
         }
 
-        if (_cfg.last_link >= (now - (_cfg.global_cooldown * 1000))) {
-            logger.notice('Hit global cooldown for ' + channel);
-            return;
-        }
-        _cfg.last_link = now;
-
         if (_cfg.user_whitelist.length > 0 && _cfg.whitelist.indexOf(nick) == -1) {
             logger.notice('Blocked link from (whitelist): ' + nick);
             return;
@@ -74,6 +68,12 @@ function urls() {
                 matches = [matches[0]];
             }
         }
+
+        if (_cfg.last_link >= (now - (_cfg.global_cooldown * 1000))) {
+            logger.notice('Hit global cooldown for ' + channel);
+            return;
+        }
+        _cfg.last_link = now;
 
         matches.map(function (uri) {
             count++;
