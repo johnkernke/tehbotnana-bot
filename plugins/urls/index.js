@@ -107,16 +107,20 @@ function urls() {
                     logger.notice('Error getting page (' + uri + '). ' + error);
                     titles[uri] = 'Error getting page ' + uri;
                 } else {
-                    var title = /<\s*title[^>]*>(.+?)<\s*\/\s*title>/gi.exec(body);
-                    if (title == null) {
-                        titles[uri] = 'Unable to get page title.';
+                    if (!/text\/html/i.test(res.headers['content-type'])) {
+                        titles[uri] = null;
                     } else {
-                        titles[uri] = self.makeTitle(title[1], uri);
+                        var title = /<\s*title[^>]*>\s*(.+?)\s*<\s*\/\s*title>/gim.exec(body);
+                        if (title === null) {
+                            titles[uri] = 'Unable to get page title.';
+                        } else {
+                            titles[uri] = self.makeTitle(title[1], uri);
 
-                        if (self.cachetime > 0) {
-                            self.cache[uri] = {
-                                time: now + (self.cachetime * 1000),
-                                title: titles[uri]
+                            if (self.cachetime > 0) {
+                                self.cache[uri] = {
+                                    time: now + (self.cachetime * 1000),
+                                    title: titles[uri]
+                                }
                             }
                         }
                     }
@@ -141,6 +145,9 @@ function urls() {
     self.sendTitles = function (count, titles, channel) {
         if (count == 0) {
             for (var _url in titles) {
+                if (titles[_url] === null) {
+                    continue;
+                }
                 app.irc.sendMessage(channel, titles[_url]);
             }
         }
