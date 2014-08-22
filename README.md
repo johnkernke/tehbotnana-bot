@@ -2,18 +2,19 @@
 
 An IRC bot by TehBanana.
 
-## Before running
+## Getting Started
 
 ```
 $ npm install
 $ cp config.sample.js config.js
-$ EDITOR config.js
+edit config.js
 $ npm start
 ```
 
 ## Features
 
  - Twitter announcing in IRC
+ - URL title announcing
 
 ## Contibutors
 
