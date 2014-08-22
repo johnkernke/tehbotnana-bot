@@ -102,10 +102,10 @@ function urls() {
                 }
             }
 
-            request(uri, function (error, res, body) {
+            var r = request(uri, function (error, res, body) {
                 if (error) {
                     logger.notice('Error getting page (' + uri + '). ' + error);
-                    titles[uri] = 'Error getting page ' + uri;
+                    titles[uri] = null;
                 } else {
                     if (!/text\/html/i.test(res.headers['content-type'])) {
                         titles[uri] = null;
@@ -127,6 +127,15 @@ function urls() {
                 }
 
                 self.sendTitles(--count, titles, channel);
+            });
+
+            var buffer = 0;
+            r.on('data', function (chunk) {
+                buffer += chunk;
+                if (buffer.length > (50 * 1024)) { // 50kb
+                    r.abort();
+                    r.emit('error', new Error('Maximum file size reached'));
+                }
             });
         });
     };
