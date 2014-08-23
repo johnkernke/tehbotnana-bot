@@ -151,6 +151,7 @@ function irc_twitter() {
         logger.notice('tweet recieved (' + channels.join(', ') + '): ' + message); // clean the message so it doesnt have colour codes, bold, etc?
 
         // loop through all channels for this account
+        channel_loop:
         for (var i = 0, l = channels.length; i < l; i++) {
             var channel = channels[i];
 
@@ -161,7 +162,7 @@ function irc_twitter() {
                 // check the retweet user
                 if (data.retweeted_status !== undefined && re.test(data.retweeted_status.user.screen_name)) {
                     logger.notice('Retweet blocked (' + channel + '), by ' + blocked_user);
-                    continue; // move to next channel, it might not be blocked there!
+                    break channel_loop; // move to next channel, it might not be blocked there!
                 }
             }
 
@@ -173,13 +174,13 @@ function irc_twitter() {
                     // check retweet
                     if (re.test(data.retweeted_status.text)) {
                         logger.notice('Retweet blocked (' + channel + '), contained "' + blocked_content + '"');
-                        continue; // move to next channel, it might not be blocked there!
+                        break channel_loop; // move to next channel, it might not be blocked there!
                     }
                 } else {
                     // check normal
                     if (re.test(data.text)) {
                         logger.notice('Tweet blocked (' + channel + '), contained "' + blocked_content + '"');
-                        continue; // move to next channel, it might not be blocked there!
+                        break channel_loop; // move to next channel, it might not be blocked there!
                     }
                 }
             }
