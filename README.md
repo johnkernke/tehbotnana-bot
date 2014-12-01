@@ -11,7 +11,7 @@ edit config.js
 $ npm start
 ```
 
-### Plugins
+## Plugins
 
 Right now, you'll need to get plugins to add more functionality to the bot. You can find those plugins in [johnkernke/tehbotnana-plugins](https://github.com/johnkernke/tehbotnana-plugins). 
 
